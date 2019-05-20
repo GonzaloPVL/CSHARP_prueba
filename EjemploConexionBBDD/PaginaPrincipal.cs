@@ -12,14 +12,20 @@ using MySql.Data.MySqlClient;
 namespace EjemploConexionBBDD
 {
     public partial class PaginaPrincipal : Form
+		
     {
-        public PaginaPrincipal()
+		
+		private DataTable datos = new DataTable();
+		public static String seleccion = "";
+
+		public PaginaPrincipal()
         {
             InitializeComponent();
             textoDesplegable();
-            //rellenaComboAutores();
-            
-        }
+			//rellenaComboAutores();
+			
+
+		}
 
 
         private void textoDesplegable()
@@ -37,62 +43,59 @@ namespace EjemploConexionBBDD
             Application.Exit();
         }
 
-        //private void rellenaComboAutores()
-        //{
-        //    MySqlConnection conexion = new ConexionBBDD().conecta();
 
-        //    MySqlCommand comando = 
-        //        new MySqlCommand("SELECT * from actors ORDER BY first_name", conexion);
-
-        //    MySqlDataReader resultado = comando.ExecuteReader();
-        //    while (resultado.Read())
-        //    {
-        //        String id = resultado.GetString(0); // el numero hace referencia al numero de columna de la BBDD
-        //        String first_name = resultado.GetString("first_name");// hace referencia al nombre de la columna de la BBDD
-        //        String last_name = resultado.GetString("last_name");
-        //        String gender = resultado.GetString("gender");
-        //        desplegable.Items.Add(first_name + " " + last_name);
-        //    }
-        //    conexion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
-        //}
+		// Código para rellenar los ComboBox
 
         private void desplegable1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (desplegable1.Text == "actors") {
+			/////////////////////////////////////////////////////////////////////////////////////////////////
+			datos.Clear();
+			listaDatos.DataSource = null;
+			listaDatos.Rows.Clear();
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 
-                desplegable2.Items.Clear(); //Este código nos vale para limpiar el comboBox antes de volver a escribir
+			if (desplegable1.Text == "actors") {
+
+				String query = "SELECT actors.first_name, actors.last_name, actors.id" +
+					" from actors ORDER BY first_name";
+				
+				desplegable2.Items.Clear(); //Este código nos vale para limpiar el comboBox antes de volver a escribir
 
                 MySqlConnection conexionActores = new ConexionBBDD().conecta();
 
-                MySqlCommand comando =
-                    new MySqlCommand("SELECT * from actors ORDER BY first_name", conexionActores);
+				MySqlCommand comando = new MySqlCommand( query, conexionActores);
+				MySqlDataReader resultado = comando.ExecuteReader();
 
-                MySqlDataReader resultado = comando.ExecuteReader();
-                while (resultado.Read())
+
+				while (resultado.Read())
                 {
-                    String id = resultado.GetString(0); // el numero hace referencia al numero de columna de la BBDD
+                    
                     String first_name = resultado.GetString("first_name");// hace referencia al nombre de la columna de la BBDD
                     String last_name = resultado.GetString("last_name");
-                    String gender = resultado.GetString("gender");
-                    desplegable2.Items.Add(first_name + " " + last_name);
-                }
-                conexionActores.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+					String id = resultado.GetString("id"); // Este id debería llamar al id del actor seleccionado en el comboBox
+					desplegable2.Items.Add(id + "-   " + first_name + " " + last_name);
+					
+				}
+				
+				conexionActores.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
                 
             }
             if(desplegable1.Text == "movies")
             {
                 desplegable2.Items.Clear();
-                MySqlConnection conexionPeliculas = new ConexionBBDD().conecta();
+				
+				MySqlConnection conexionPeliculas = new ConexionBBDD().conecta();
 
                 MySqlCommand comando =
-                    new MySqlCommand("SELECT * from movies", conexionPeliculas);
+                    new MySqlCommand("SELECT movies.id, movies.name, movies.year from movies", conexionPeliculas);
 
                 MySqlDataReader resultado = comando.ExecuteReader();
                 while (resultado.Read())
                 {
                     String name = resultado.GetString("name");// hace referencia al nombre de la película
                     String year = resultado.GetString("year");// hace referencia al año
-                    desplegable2.Items.Add(name + "   año: " + year);
+					String id = resultado.GetString("id");
+					desplegable2.Items.Add(id + "-   " + name + "   año: " + year);
                 }
                 conexionPeliculas.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
             }
@@ -100,40 +103,255 @@ namespace EjemploConexionBBDD
             if(desplegable1.Text == "directors")
             {
                 desplegable2.Items.Clear();
-                MySqlConnection conexionDirectores = new ConexionBBDD().conecta();
+				
+				MySqlConnection conexionDirectores = new ConexionBBDD().conecta();
 
                 MySqlCommand comando =
-                    new MySqlCommand("SELECT * from directors", conexionDirectores);
+                    new MySqlCommand("SELECT directors.id, directors.first_name, directors.last_name" +
+					" from directors", conexionDirectores);
 
                 MySqlDataReader resultado = comando.ExecuteReader();
                 while (resultado.Read())
                 {
                     String first_name = resultado.GetString("first_name");// hace referencia al nombre de la columna de la BBDD
                     String last_name = resultado.GetString("last_name");
-                    desplegable2.Items.Add(first_name + " " + last_name);
+					String id = resultado.GetString("id");
+                    desplegable2.Items.Add(id+"-   "+first_name + " " + last_name);
                 }
                 conexionDirectores.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
             }
-        }
+			if (desplegable1.Text == "Géneros")
+			{
+				desplegable2.Items.Clear();
 
-        private void desplegable2_SelectedIndexChanged(object sender, EventArgs e)
+				MySqlConnection conexionDirectores = new ConexionBBDD().conecta();
+
+				MySqlCommand comando =
+					new MySqlCommand("SELECT distinct movies_genres.genre" +
+					" from movies_genres", conexionDirectores);
+
+				MySqlDataReader resultado = comando.ExecuteReader();
+				while (resultado.Read())
+				{
+					//String movie_id = resultado.GetString("movie_id");// hace referencia al nombre de la columna de la BBDD
+					String genre = resultado.GetString("genre");
+					desplegable2.Items.Add(genre);
+				}
+				conexionDirectores.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+			}
+
+
+		}
+
+
+		// A partir de aqui tenemos el DataGridView
+
+		private void desplegable2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String pedido = desplegable1.Text;
-            listaInformacion.Clear();
-            MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+			///////////////////////////////////////////////////////////////////////////////////////
+			datos.Clear();
+			listaDatos.DataSource = null;
+			listaDatos.Rows.Clear();
+			//////////////////////////////////////////////////////////////////////////////////
 
-            MySqlCommand comando =
-                new MySqlCommand("SELECT * from "  + pedido , conexionInformacion);
+			string index = desplegable2.Text.ToString();
+			
+			String indice = "";
 
-            MySqlDataReader resultado = comando.ExecuteReader();
-            while (resultado.Read())
-            {
-                String first_name = resultado.GetString("first_name");// hace referencia al nombre de la columna de la BBDD
-                listaInformacion.Text = first_name;
-            }
-            conexionInformacion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
-            // Aqui tenemos que rellenar un textBox o un listBox con el contenido de
-            // las peliculas.
-        }
-    }
+
+			for(int i = 0; i<index.Length; i++)
+			{
+				if(index[i] != '-')
+				{
+					indice = index.Substring(0, i+1);
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			if (desplegable1.Text == "actors") {
+				String barra1 = desplegable1.Text;
+				String barra2 = desplegable2.Text;
+				
+
+				MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+
+				MySqlCommand comando =
+					new MySqlCommand("SELECT distinct movies.* from movies, roles, actors " +
+					"where movies.id = roles.movie_id and " +
+					"roles.actor_id = " + indice
+					, conexionInformacion);
+
+				MySqlDataReader resultado = comando.ExecuteReader();
+				
+				datos.Load(resultado);
+				listaDatos.DataSource = datos;
+
+				conexionInformacion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+											 // Aqui tenemos que rellenar un textBox o un listBox con el contenido de
+											 // las peliculas.
+			}
+
+			if (desplegable1.Text == "directors")
+			{
+				String barra1 = desplegable1.Text;
+				String barra2 = desplegable2.Text;
+				
+
+				MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+
+				MySqlCommand comando =
+					new MySqlCommand("SELECT distinct movies.* from movies, movies_directors, directors " +
+					"where movies.id = movies_directors.movie_id and " +
+					"movies_directors.director_id = " + indice
+					, conexionInformacion);
+
+				MySqlDataReader resultado = comando.ExecuteReader();
+
+				datos.Load(resultado);
+				listaDatos.DataSource = datos;
+
+				conexionInformacion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+											 // Aqui tenemos que rellenar un textBox o un listBox con el contenido de
+											 // las peliculas.
+			}
+
+			if (desplegable1.Text == "movies")
+			{
+				String barra1 = desplegable1.Text;
+				String barra2 = desplegable2.Text;
+				
+				
+
+				MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+
+				MySqlCommand comando =
+					new MySqlCommand("SELECT movies.* from movies where movies.id = " + indice
+					, conexionInformacion);
+
+				MySqlDataReader resultado = comando.ExecuteReader();
+
+				datos.Load(resultado);
+				listaDatos.DataSource = datos;
+
+				conexionInformacion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+											 // Aqui tenemos que rellenar un textBox o un listBox con el contenido de
+											 // las peliculas.
+			}
+
+			if (desplegable1.Text == "Géneros")
+			{
+				String barra1 = desplegable1.Text;
+				String barra2 = desplegable2.Text;
+
+				MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+
+				MySqlCommand comando =
+					new MySqlCommand("SELECT movies.* from movies, movies_genres where movies.id = movies_genres.movie_id and genre ='" + barra2 + "'"
+					, conexionInformacion);
+
+				MySqlDataReader resultado = comando.ExecuteReader();
+
+				datos.Load(resultado);
+				listaDatos.DataSource = datos;
+
+				conexionInformacion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+											 // Aqui tenemos que rellenar un textBox o un listBox con el contenido de
+											 // las peliculas.
+			}
+
+
+
+
+
+
+		}
+
+		private void buscador_MouseClick(object sender, MouseEventArgs e)
+		{
+			buscador.Clear();
+		}
+
+
+		private void button_buscar_Click(object sender, EventArgs e)
+		{
+
+			datos.Clear();
+			listaDatos.DataSource = null;
+			listaDatos.Rows.Clear();
+
+			String buscador_id = buscador.Text;
+			
+
+			MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+
+			
+			MySqlCommand comando =
+				new MySqlCommand("SELECT movies.* from movies where movies.id = '" + buscador_id + "'"
+				, conexionInformacion);
+
+			MySqlDataReader resultado = comando.ExecuteReader();
+
+				datos.Load(resultado);
+				listaDatos.DataSource = datos;
+				conexionInformacion.Close();
+			
+
+			
+
+			conexionInformacion.Close(); //Cerrar siempre la conexion porque no lo hace automáticamente
+										 // Aqui tenemos que rellenar un textBox o un listBox con el contenido de
+										 // las peliculas.
+
+
+
+		}
+
+		private void Enter(object sender, KeyEventArgs key)
+		{
+			if (key.KeyCode.Equals(Keys.Enter))
+			{
+				datos.Clear();
+				listaDatos.DataSource = null;
+				listaDatos.Rows.Clear();
+
+				String buscador_id = buscador.Text;
+
+				MySqlConnection conexionInformacion = new ConexionBBDD().conecta();
+
+				MySqlCommand comando =
+					new MySqlCommand("SELECT movies.* from movies where movies.id = '" + buscador_id + "'"
+					, conexionInformacion);
+
+				MySqlDataReader resultado = comando.ExecuteReader();
+
+					datos.Load(resultado);
+					listaDatos.DataSource = datos;
+					conexionInformacion.Close();
+
+
+				conexionInformacion.Close();
+			}
+		}
+
+		private void listaDatos_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+
+			foreach (DataGridViewCell cell in listaDatos.SelectedCells)
+			{
+				seleccion = (cell.Value.ToString());
+				Ficha ficha = new Ficha();
+				ficha.Visible = true;
+			}
+
+
+			//Aqui enlazaremos con la pagina de la ficha
+			//
+			//
+			//Método para llamar a otras clases 
+			//
+		}
+	}
 }

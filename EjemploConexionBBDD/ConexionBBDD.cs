@@ -20,11 +20,11 @@ namespace EjemploConexionBBDD
              * 5º Port: puerto, por defecto es el 3306
              */
             MySqlConnection conexion = new MySqlConnection(
-                "Server = 127.0.0.1;" +
-                "Database=Videoclub;" +
-                "Uid=root"+
-                "Pwd=;" +
-                "Port=3306");
+									"Server = 127.0.0.1;" +
+									"Database=Videoclub;" +
+									"Uid=root;"+
+									"Pwd=;" +
+									"Port=3306;");
             conexion.Open();
 
             return conexion;

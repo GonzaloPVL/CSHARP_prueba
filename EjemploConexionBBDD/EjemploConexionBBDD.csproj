@@ -63,6 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionBBDD.cs" />
+    <Compile Include="Ficha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ficha.Designer.cs">
+      <DependentUpon>Ficha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioAltas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularioAltas.Designer.cs">
+      <DependentUpon>FormularioAltas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Ficha.resx">
+      <DependentUpon>Ficha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularioAltas.resx">
+      <DependentUpon>FormularioAltas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

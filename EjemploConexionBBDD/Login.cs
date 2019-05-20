@@ -16,7 +16,7 @@ namespace EjemploConexionBBDD
         public Login()
         {
             InitializeComponent();
-        }
+		}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,6 +44,8 @@ namespace EjemploConexionBBDD
                 {
                     MessageBox.Show("Usuario y/o contraseña incorrecto(s)", "ERROR");
                 }
+
+				
         }
     }
 }
