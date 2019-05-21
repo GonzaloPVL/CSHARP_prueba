@@ -353,5 +353,11 @@ namespace EjemploConexionBBDD
 			//Método para llamar a otras clases 
 			//
 		}
+
+		private void alta_Click(object sender, EventArgs e)
+		{
+			PortalTrabajador portal = new PortalTrabajador();
+			portal.Visible = true;
+		}
 	}
 }

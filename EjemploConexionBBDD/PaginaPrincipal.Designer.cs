@@ -35,6 +35,7 @@
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.buscador = new System.Windows.Forms.TextBox();
 			this.button_buscar = new System.Windows.Forms.Button();
+			this.alta = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.listaDatos)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -95,11 +96,22 @@
 			this.button_buscar.UseVisualStyleBackColor = true;
 			this.button_buscar.Click += new System.EventHandler(this.button_buscar_Click);
 			// 
+			// alta
+			// 
+			this.alta.Location = new System.Drawing.Point(51, 503);
+			this.alta.Name = "alta";
+			this.alta.Size = new System.Drawing.Size(123, 35);
+			this.alta.TabIndex = 16;
+			this.alta.Text = "Alta Trabajadores";
+			this.alta.UseVisualStyleBackColor = true;
+			this.alta.Click += new System.EventHandler(this.alta_Click);
+			// 
 			// PaginaPrincipal
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(898, 588);
+			this.Controls.Add(this.alta);
 			this.Controls.Add(this.button_buscar);
 			this.Controls.Add(this.buscador);
 			this.Controls.Add(this.listaDatos);
@@ -122,5 +134,6 @@
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 		private System.Windows.Forms.TextBox buscador;
 		private System.Windows.Forms.Button button_buscar;
+		private System.Windows.Forms.Button alta;
 	}
 }
