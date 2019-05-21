@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.dni = new System.Windows.Forms.TextBox();
 			this.nombre = new System.Windows.Forms.TextBox();
 			this.apellido = new System.Windows.Forms.TextBox();
@@ -39,19 +38,8 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.volver = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
-			this.iniciar = new System.Windows.Forms.Button();
-			this.capturar = new System.Windows.Forms.Button();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.cargaFotos = new System.Windows.Forms.Button();
 			this.SuspendLayout();
-			// 
-			// comboBox1
-			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(491, 69);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(157, 21);
-			this.comboBox1.TabIndex = 0;
 			// 
 			// dni
 			// 
@@ -137,44 +125,22 @@
 			this.button4.UseVisualStyleBackColor = true;
 			this.button4.Click += new System.EventHandler(this.button4_Click);
 			// 
-			// iniciar
+			// cargaFotos
 			// 
-			this.iniciar.Location = new System.Drawing.Point(491, 284);
-			this.iniciar.Name = "iniciar";
-			this.iniciar.Size = new System.Drawing.Size(75, 23);
-			this.iniciar.TabIndex = 14;
-			this.iniciar.Text = "iniciar";
-			this.iniciar.UseVisualStyleBackColor = true;
-			this.iniciar.Click += new System.EventHandler(this.iniciar_Click);
-			// 
-			// capturar
-			// 
-			this.capturar.Location = new System.Drawing.Point(573, 284);
-			this.capturar.Name = "capturar";
-			this.capturar.Size = new System.Drawing.Size(75, 23);
-			this.capturar.TabIndex = 15;
-			this.capturar.Text = "capturar";
-			this.capturar.UseVisualStyleBackColor = true;
-			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.BackgroundImage = global::EjemploConexionBBDD.Properties.Resources.user1;
-			this.pictureBox1.Image = global::EjemploConexionBBDD.Properties.Resources.user1;
-			this.pictureBox1.Location = new System.Drawing.Point(492, 107);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(155, 156);
-			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBox1.TabIndex = 16;
-			this.pictureBox1.TabStop = false;
+			this.cargaFotos.Location = new System.Drawing.Point(128, 300);
+			this.cargaFotos.Name = "cargaFotos";
+			this.cargaFotos.Size = new System.Drawing.Size(116, 30);
+			this.cargaFotos.TabIndex = 15;
+			this.cargaFotos.Text = "Cargar fotos";
+			this.cargaFotos.UseVisualStyleBackColor = true;
+			this.cargaFotos.Click += new System.EventHandler(this.cargaFotos_Click);
 			// 
 			// FormularioAltas
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.capturar);
-			this.Controls.Add(this.iniciar);
+			this.ClientSize = new System.Drawing.Size(382, 450);
+			this.Controls.Add(this.cargaFotos);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.volver);
 			this.Controls.Add(this.label4);
@@ -185,18 +151,14 @@
 			this.Controls.Add(this.apellido);
 			this.Controls.Add(this.nombre);
 			this.Controls.Add(this.dni);
-			this.Controls.Add(this.comboBox1);
 			this.Name = "FormularioAltas";
 			this.Text = "FormularioAltas";
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.TextBox dni;
 		private System.Windows.Forms.TextBox nombre;
 		private System.Windows.Forms.TextBox apellido;
@@ -207,8 +169,6 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button volver;
 		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.Button iniciar;
-		private System.Windows.Forms.Button capturar;
-		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Button cargaFotos;
 	}
 }

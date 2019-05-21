@@ -44,8 +44,6 @@ namespace EjemploConexionBBDD
                 {
                     MessageBox.Show("Usuario y/o contraseña incorrecto(s)", "ERROR");
                 }
-
-				
         }
-    }
+	}
 }

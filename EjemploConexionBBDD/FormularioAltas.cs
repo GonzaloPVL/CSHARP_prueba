@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using System.Diagnostics;
 
 namespace EjemploConexionBBDD
 {
@@ -52,41 +53,18 @@ namespace EjemploConexionBBDD
 			this.Visible = false; //oculta la ventana
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		private void iniciar_Click(object sender, EventArgs e)
+		private void cargaFotos_Click(object sender, EventArgs e)
 		{
-			//VideoCaptureDevice video = new VideoCaptureDevice();
-			//FilterInfoCollection DispositivoDeVideo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+			ProcessStartInfo info = new ProcessStartInfo();
 
-			//video(DispositivoDeVideo)
-			//VideoCapabilities(DispositivoDeVideo[cbxDispositivos.SelectedIndex].MonikerString);
-			//FuenteDeVideo.NewFrame += new NewFrameEventHandler(Video_NuevoFrame);
+			info.UseShellExecute = true;
+
+			info.FileName = "WebCam 2017.exe";
+
+			info.WorkingDirectory = "C:\\Users\\gonza\\Desktop";
+
+			Process.Start(info);
+
 		}
 	}
 }
