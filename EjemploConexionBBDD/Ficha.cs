@@ -19,6 +19,7 @@ namespace EjemploConexionBBDD
 		//////////Vamos a declarar una variable string que nos de el valor de la fecha en que ha sido alquilada
 		String fecha_alquilado = "";
 		String fecha_devuelto = "";
+		public static String dni_ficha = "";
 
 		private DataTable datos = new DataTable();
 
@@ -251,6 +252,7 @@ namespace EjemploConexionBBDD
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			dni_ficha = textBoxDNI.Text;
 			FormularioAltas pagina = new FormularioAltas();
 			pagina.Visible = true;
 		}

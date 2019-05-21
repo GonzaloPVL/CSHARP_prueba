@@ -19,6 +19,7 @@ namespace EjemploConexionBBDD
 		public FormularioAltas()
 		{
 			InitializeComponent();
+			dni.Text = Ficha.dni_ficha;
 		}
 		
 		////////////////////////////////// Acceso a formulario///////////////////////////////////

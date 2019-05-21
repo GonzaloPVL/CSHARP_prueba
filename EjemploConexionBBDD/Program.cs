@@ -16,7 +16,7 @@ namespace EjemploConexionBBDD
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Ficha());
+            Application.Run(new Login());
           
             
         }
